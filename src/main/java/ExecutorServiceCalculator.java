@@ -11,6 +11,8 @@ public class ExecutorServiceCalculator extends Calculator {
 
     public int calculate(List<Callable<Integer>> calculators) throws InterruptedException {
         ExecutorService executorService = Executors.newFixedThreadPool(threadsCount);
-        return execute(executorService.invokeAll(calculators));
+        int result = execute(executorService.invokeAll(calculators));
+        executorService.shutdown();
+        return result;
     }
 }
